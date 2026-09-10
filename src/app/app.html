@@ -1,92 +1,37 @@
 @if (authService.isLoggedIn()) {
-  <div class="min-h-screen bg-gray-50 flex">
-
-    <!-- Mobile overlay -->
+  <div class="min-h-screen bg-canvas text-ink-950 lg:flex">
     @if (sidebarOpen()) {
-      <div
-        class="fixed inset-0 bg-black/40 z-30 lg:hidden"
-        (click)="closeSidebar()"
-      ></div>
+      <div class="fixed inset-0 z-30 bg-ink-950/35 backdrop-blur-[2px] lg:hidden" (click)="closeSidebar()" aria-hidden="true"></div>
     }
 
-    <!-- Sidebar -->
-    <aside
-      class="fixed lg:static inset-y-0 left-0 z-40 w-64 bg-white border-r border-gray-200
-             transform transition-transform duration-200 flex flex-col
-             lg:translate-x-0"
-      [class.-translate-x-full]="!sidebarOpen()"
-      [class.translate-x-0]="sidebarOpen()"
-    >
-      <div class="h-16 flex items-center px-6 border-b border-gray-200">
-        <span class="font-bold text-lg text-gray-800">Task<span class="text-blue-600">Pulse</span></span>
+    <aside class="fixed inset-y-0 left-0 z-40 flex w-[17rem] -translate-x-full flex-col border-r border-line bg-white transition-transform duration-200 lg:static lg:translate-x-0" [class.translate-x-0]="sidebarOpen()">
+      <div class="flex h-[5.25rem] items-center gap-3 border-b border-line px-6">
+        <div class="flex size-10 items-center justify-center rounded-xl bg-accent-600 font-display text-lg font-bold text-white shadow-lg shadow-indigo-200">T</div>
+        <div><p class="font-display text-lg font-bold tracking-tight">Task<span class="text-accent-600">Pulse</span></p><p class="text-[10px] font-bold uppercase tracking-[.16em] text-ink-500">Work with momentum</p></div>
       </div>
-
-      <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-        <a routerLink="/dashboard" routerLinkActive="bg-blue-50 text-blue-700" (click)="closeSidebar()"
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
-          <span>📊</span> Dashboard
-        </a>
-        <a routerLink="/projects" routerLinkActive="bg-blue-50 text-blue-700" (click)="closeSidebar()"
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
-          <span>📁</span> Projects
-        </a>
-        <a routerLink="/tasks" routerLinkActive="bg-blue-50 text-blue-700" (click)="closeSidebar()"
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
-          <span>✅</span> My Tasks
-        </a>
-        <a routerLink="/notifications" routerLinkActive="bg-blue-50 text-blue-700" (click)="closeSidebar()"
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
-          <span>🔔</span> Notifications
-        </a>
-        <a routerLink="/reports" routerLinkActive="bg-blue-50 text-blue-700" (click)="closeSidebar()"
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
-          <span>📈</span> Reports
-        </a>
-
+      <nav class="app-scrollbar flex-1 overflow-y-auto px-4 py-6" aria-label="Primary navigation">
+        <p class="mb-3 px-3 text-[10px] font-bold uppercase tracking-[.16em] text-ink-500">Workspace</p>
+        <div class="flex flex-col gap-1">
+          <a routerLink="/dashboard" routerLinkActive="bg-accent-50 text-accent-700" [routerLinkActiveOptions]="{exact: true}" (click)="closeSidebar()" class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-ink-700 transition-colors hover:bg-slate-50 hover:text-ink-950"><span class="flex size-8 items-center justify-center rounded-lg bg-slate-100 text-xs font-bold text-ink-500 group-[.bg-accent-50]:bg-white group-[.bg-accent-50]:text-accent-600" aria-hidden="true">▦</span> Dashboard</a>
+          <a routerLink="/projects" routerLinkActive="bg-accent-50 text-accent-700" (click)="closeSidebar()" class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-ink-700 transition-colors hover:bg-slate-50 hover:text-ink-950"><span class="flex size-8 items-center justify-center rounded-lg bg-slate-100 text-xs font-bold text-ink-500 group-[.bg-accent-50]:bg-white group-[.bg-accent-50]:text-accent-600" aria-hidden="true">□</span> Projects</a>
+          <a routerLink="/tasks" routerLinkActive="bg-accent-50 text-accent-700" (click)="closeSidebar()" class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-ink-700 transition-colors hover:bg-slate-50 hover:text-ink-950"><span class="flex size-8 items-center justify-center rounded-lg bg-slate-100 text-xs font-bold text-ink-500 group-[.bg-accent-50]:bg-white group-[.bg-accent-50]:text-accent-600" aria-hidden="true">✓</span> My tasks</a>
+          <a routerLink="/notifications" routerLinkActive="bg-accent-50 text-accent-700" (click)="closeSidebar()" class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-ink-700 transition-colors hover:bg-slate-50 hover:text-ink-950"><span class="flex size-8 items-center justify-center rounded-lg bg-slate-100 text-xs font-bold text-ink-500 group-[.bg-accent-50]:bg-white group-[.bg-accent-50]:text-accent-600" aria-hidden="true">!</span> Notifications</a>
+          <a routerLink="/reports" routerLinkActive="bg-accent-50 text-accent-700" (click)="closeSidebar()" class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-ink-700 transition-colors hover:bg-slate-50 hover:text-ink-950"><span class="flex size-8 items-center justify-center rounded-lg bg-slate-100 text-xs font-bold text-ink-500 group-[.bg-accent-50]:bg-white group-[.bg-accent-50]:text-accent-600" aria-hidden="true">↗</span> Reports</a>
+        </div>
         @if (isAdmin()) {
-          <div class="pt-4 mt-4 border-t border-gray-200">
-            <p class="px-3 text-xs font-semibold text-gray-400 uppercase mb-1">Admin</p>
-            <a routerLink="/users" routerLinkActive="bg-blue-50 text-blue-700" (click)="closeSidebar()"
-               class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
-              <span>👥</span> Users
-            </a>
-          </div>
+          <div class="mt-7 border-t border-line pt-6"><p class="mb-3 px-3 text-[10px] font-bold uppercase tracking-[.16em] text-ink-500">Administration</p><a routerLink="/users" routerLinkActive="bg-accent-50 text-accent-700" (click)="closeSidebar()" class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-ink-700 transition-colors hover:bg-slate-50 hover:text-ink-950"><span class="flex size-8 items-center justify-center rounded-lg bg-slate-100 text-xs font-bold text-ink-500 group-[.bg-accent-50]:bg-white group-[.bg-accent-50]:text-accent-600" aria-hidden="true">+</span> Users</a></div>
         }
       </nav>
-
-      <div class="px-3 py-4 border-t border-gray-200">
-        <button (click)="logout()"
-                class="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50">
-          <span>🚪</span> Logout
-        </button>
-      </div>
+      <div class="border-t border-line p-4"><button (click)="logout()" class="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-danger transition-colors hover:bg-rose-50"><span class="flex size-8 items-center justify-center rounded-lg bg-rose-50 text-xs" aria-hidden="true">↪</span> Sign out</button></div>
     </aside>
 
-    <!-- Main column -->
-    <div class="flex-1 flex flex-col min-w-0">
-      <!-- Top bar -->
-      <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 lg:px-6 flex-shrink-0">
-        <button (click)="toggleSidebar()" class="lg:hidden p-2 -ml-2 text-gray-600">
-          ☰
-        </button>
-        <span class="lg:hidden font-bold text-gray-800">Task<span class="text-blue-600">Pulse</span></span>
-        <div class="hidden lg:block"></div>
-        <div class="flex items-center gap-3">
-          <span class="text-sm text-gray-600 hidden sm:inline">{{ authService.currentUser()?.name }}</span>
-          <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-semibold">
-            {{ authService.currentUser()?.name?.charAt(0) }}
-          </div>
-        </div>
+    <div class="flex min-w-0 flex-1 flex-col">
+      <header class="flex h-[5.25rem] shrink-0 items-center justify-between border-b border-line bg-white px-4 lg:px-8">
+        <div class="flex items-center gap-3"><button (click)="toggleSidebar()" class="flex size-10 items-center justify-center rounded-xl border border-line text-ink-700 hover:bg-slate-50 lg:hidden" aria-label="Toggle navigation"><span aria-hidden="true">☰</span></button><div class="lg:hidden"><p class="font-display font-bold">Task<span class="text-accent-600">Pulse</span></p></div><div class="hidden lg:block"><p class="text-xs font-semibold text-ink-500">Workspace / <span class="text-ink-700">Overview</span></p></div></div>
+        <div class="flex items-center gap-3"><div class="hidden text-right sm:block"><p class="text-sm font-bold text-ink-950">{{ authService.currentUser()?.name }}</p><p class="text-xs font-medium text-ink-500">{{ authService.currentUser()?.role }} account</p></div><div class="flex size-10 items-center justify-center rounded-full bg-accent-100 font-display font-bold text-accent-700">{{ authService.currentUser()?.name?.charAt(0)?.toUpperCase() }}</div></div>
       </header>
-
-      <!-- Page content -->
-      <main class="flex-1 overflow-y-auto">
-        <router-outlet></router-outlet>
-      </main>
+      <main class="app-scrollbar flex-1 overflow-y-auto"><router-outlet></router-outlet></main>
     </div>
   </div>
-} @else {
-  <router-outlet></router-outlet>
-}
-
+} @else { <router-outlet></router-outlet> }
 <app-toast></app-toast>
