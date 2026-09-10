@@ -1,0 +1,32 @@
+<div class="max-w-lg mx-auto mt-10 bg-white shadow rounded-xl p-8">
+  <h1 class="text-xl font-bold text-gray-800 mb-6">New Task</h1>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium text-gray-600 mb-1">Title</label>
+      <input formControlName="title" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-accent-500 focus:outline-none" />
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-600 mb-1">Description</label>
+      <textarea formControlName="description" rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-accent-500 focus:outline-none"></textarea>
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-600 mb-1">Due Date</label>
+      <input type="date" formControlName="dueDate" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-accent-500 focus:outline-none" />
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-600 mb-1">Priority</label>
+      <select formControlName="priority" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-accent-500 focus:outline-none">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+        <option value="Critical">Critical</option>
+      </select>
+    </div>
+    @if (errorMessage) {
+      <p class="text-red-600 text-sm">{{ errorMessage }}</p>
+    }
+    <button type="submit" [disabled]="isLoading" class="w-full bg-accent-600 hover:bg-accent-700 text-white rounded-lg py-2.5 font-medium disabled:opacity-50">
+      {{ isLoading ? 'Creating...' : 'Create Task' }}
+    </button>
+  </form>
+</div>

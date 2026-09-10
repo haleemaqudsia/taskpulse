@@ -1,0 +1,29 @@
+<div class="max-w-lg mx-auto mt-10 bg-white shadow rounded-xl p-8">
+  <h1 class="text-xl font-bold text-gray-800 mb-6">New Project</h1>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium text-gray-600 mb-1">Name</label>
+      <input formControlName="name" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-accent-500 focus:outline-none" />
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-600 mb-1">Description</label>
+      <textarea formControlName="description" rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-accent-500 focus:outline-none"></textarea>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">Start Date</label>
+        <input type="date" formControlName="startDate" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-accent-500 focus:outline-none" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">End Date</label>
+        <input type="date" formControlName="endDate" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-accent-500 focus:outline-none" />
+      </div>
+    </div>
+    @if (errorMessage) {
+      <p class="text-red-600 text-sm">{{ errorMessage }}</p>
+    }
+    <button type="submit" [disabled]="isLoading" class="w-full bg-accent-600 hover:bg-accent-700 text-white rounded-lg py-2.5 font-medium disabled:opacity-50">
+      {{ isLoading ? 'Creating...' : 'Create Project' }}
+    </button>
+  </form>
+</div>

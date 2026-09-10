@@ -1,0 +1,30 @@
+<div class="page">
+  <div class="page-header">
+    <h1>Projects</h1>
+    <a routerLink="/projects/new" class="btn-primary">+ New Project</a>
+  </div>
+
+  @if (loading) {
+    <p>Loading projects...</p>
+  } @else if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  } @else if (projects.length === 0) {
+    <p class="empty-state">No projects yet. Create your first one.</p>
+  } @else {
+    <div class="project-grid">
+      @for (project of projects; track project.id) {
+        <a [routerLink]="['/projects', project.id]" class="project-card">
+          <div class="card-top">
+            <h3>{{ project.name }}</h3>
+            <span class="status-badge" [attr.data-status]="project.status">{{ project.status }}</span>
+          </div>
+          <p class="description">{{ project.description || 'No description' }}</p>
+          <div class="card-footer">
+            <span>{{ project.taskCount }} tasks</span>
+            <span class="priority-badge" [attr.data-priority]="project.priority">{{ project.priority }}</span>
+          </div>
+        </a>
+      }
+    </div>
+  }
+</div>

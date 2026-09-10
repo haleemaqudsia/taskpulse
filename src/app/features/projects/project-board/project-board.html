@@ -1,0 +1,80 @@
+<div class="p-8">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Task Board</h1>
+    <a [routerLink]="['/tasks/new']" [queryParams]="{projectId: projectId}" class="bg-accent-600 hover:bg-accent-700 text-white rounded-lg px-4 py-2 text-sm font-medium">+ New Task</a>
+  </div>
+
+  <div class="grid grid-cols-5 gap-3">
+
+    <div class="bg-blue-50 rounded-xl p-3">
+      <h2 class="font-semibold text-blue-700 mb-3 text-sm">To-Do</h2>
+      <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo()"
+           [cdkDropListConnectedTo]="[inProgressList, reviewList, doneList, blockedList]"
+           (cdkDropListDropped)="drop($event, 'To-Do')" class="space-y-2 min-h-[100px]">
+        @for (task of todo(); track task.id) {
+          <div cdkDrag class="bg-white rounded-lg shadow p-3 cursor-move">
+            <p class="font-medium text-gray-800 text-sm">{{ task.title }}</p>
+            <span class="text-xs text-gray-500">{{ task.priority }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="bg-purple-50 rounded-xl p-3">
+      <h2 class="font-semibold text-purple-700 mb-3 text-sm">In Progress</h2>
+      <div cdkDropList #inProgressList="cdkDropList" [cdkDropListData]="inProgress()"
+           [cdkDropListConnectedTo]="[todoList, reviewList, doneList, blockedList]"
+           (cdkDropListDropped)="drop($event, 'In Progress')" class="space-y-2 min-h-[100px]">
+        @for (task of inProgress(); track task.id) {
+          <div cdkDrag class="bg-white rounded-lg shadow p-3 cursor-move">
+            <p class="font-medium text-gray-800 text-sm">{{ task.title }}</p>
+            <span class="text-xs text-gray-500">{{ task.priority }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="bg-yellow-50 rounded-xl p-3">
+      <h2 class="font-semibold text-yellow-700 mb-3 text-sm">Review</h2>
+      <div cdkDropList #reviewList="cdkDropList" [cdkDropListData]="review()"
+           [cdkDropListConnectedTo]="[todoList, inProgressList, doneList, blockedList]"
+           (cdkDropListDropped)="drop($event, 'Review')" class="space-y-2 min-h-[100px]">
+        @for (task of review(); track task.id) {
+          <div cdkDrag class="bg-white rounded-lg shadow p-3 cursor-move">
+            <p class="font-medium text-gray-800 text-sm">{{ task.title }}</p>
+            <span class="text-xs text-gray-500">{{ task.priority }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="bg-green-50 rounded-xl p-3">
+      <h2 class="font-semibold text-green-700 mb-3 text-sm">Done</h2>
+      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done()"
+           [cdkDropListConnectedTo]="[todoList, inProgressList, reviewList, blockedList]"
+           (cdkDropListDropped)="drop($event, 'Done')" class="space-y-2 min-h-[100px]">
+        @for (task of done(); track task.id) {
+          <div cdkDrag class="bg-white rounded-lg shadow p-3 cursor-move">
+            <p class="font-medium text-gray-800 text-sm">{{ task.title }}</p>
+            <span class="text-xs text-gray-500">{{ task.priority }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="bg-red-50 rounded-xl p-3">
+      <h2 class="font-semibold text-red-700 mb-3 text-sm">Blocked</h2>
+      <div cdkDropList #blockedList="cdkDropList" [cdkDropListData]="blocked()"
+           [cdkDropListConnectedTo]="[todoList, inProgressList, reviewList, doneList]"
+           (cdkDropListDropped)="drop($event, 'Blocked')" class="space-y-2 min-h-[100px]">
+        @for (task of blocked(); track task.id) {
+          <div cdkDrag class="bg-white rounded-lg shadow p-3 cursor-move">
+            <p class="font-medium text-gray-800 text-sm">{{ task.title }}</p>
+            <span class="text-xs text-gray-500">{{ task.priority }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+  </div>
+</div>
